@@ -1,9 +1,7 @@
 var _ = require('lodash');
+var uuid = require('node-uuid');
 
-var routes = [
-    { 'id': 1, 'priority': 0, 'url': 'test' },
-    { 'id': 2, 'priority': 0, 'url': 'foo' }
-];
+var routes = [];
 
 var Router = function() {};
 
@@ -26,9 +24,8 @@ Router.prototype.add = function(url, priority) {
     // TODO switch to storage agnostic
     // TODO move memory storage implementation out
     // TODO data validation
-    var id = _.last(routes).id + 1;
     var newRoute = {
-        'id': id,
+        'id': uuid.v4(),
         'priority': priority,
         'url': url
     };

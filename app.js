@@ -42,7 +42,6 @@ app.get('/admin/pages/add', function(req, res) {
 
 app.post('/admin/pages', function(req, res) {
     var pager = new Pager();
-    console.log(req.body);
     pager.add(req.body.route_id, req.body.title, req.body.content);
 
     res.redirect('/admin/pages');

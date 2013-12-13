@@ -1,9 +1,7 @@
 var _ = require('lodash');
+var uuid = require('node-uuid');
 
-var pages = [
-    { 'id': 1, 'route_id': 1, 'title': 'test', 'content': 'hello work' },
-    { 'id': 2, 'route_id': 2, 'title': 'foo', 'content': 'baer' }
-];
+var pages = [];
 
 var Pager = function() {};
 
@@ -22,9 +20,8 @@ Pager.prototype.add = function(route_id, title, content) {
     // TODO switch to storage agnostic
     // TODO move memory storage implementation out
     // TODO data validation
-    var id = _.last(pages).id + 1;
     var newPage = {
-        'id': id,
+        'id': uuid.v4(),
         'route_id': route_id,
         'title': title,
         'content': content
