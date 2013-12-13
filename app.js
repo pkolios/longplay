@@ -1,19 +1,8 @@
-var express = require('express'),
-    swig = require('swig');
+var app = require('./init');
 
 var Pager = require('./pager');
 var Router = require('./router');
 
-var app = express();
-
-// Middlewares
-app.use(express.bodyParser());
-
-// Templating
-app.engine('html', swig.renderFile);
-app.set('view engine', 'html');
-app.set('views', __dirname + '/templates');
-app.set('view cache', false);
 
 app.get('/admin', function(req, res) {
     // TODO Admin dashboard
