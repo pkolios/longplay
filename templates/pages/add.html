@@ -1,0 +1,31 @@
+{% extends '../layout.html' %}
+
+{% block title %}Add page{% endblock %}
+
+{% block head %}
+  {% parent %}
+  <link rel="stylesheet" href="custom.css">
+{% endblock %}
+
+{% block content %}
+<form class="form-inline" role="form" method="post" action="/admin/pages">
+  <div class="form-group">
+    <label class="sr-only" for="route_id">Route</label>
+    <select class="form-control" name="route_id">
+    {% for route in routes %}
+    <option value={{ route.id }}>{{ route.url }}</option>
+    {% endfor %}
+    </select>
+  </div>
+  <div class="form-group">
+    <label class="sr-only" for="title">Title</label>
+    <input type="text" class="form-control" name="title" placeholder="Enter title">
+  </div>
+  <div class="form-group">
+    <label class="sr-only" for="content">Content</label>
+    <textarea type="text" class="form-control" name="content" placeholder="Enter content"></textarea>
+  </div>
+  <button type="submit" class="btn btn-default">Submit</button>
+  <a href="/admin/pages">Back</a>
+</form>
+{% endblock %}
