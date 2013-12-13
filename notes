@@ -1,1 +1,6 @@
 Long Play
+
+Add route resolver
+Add views for adding / removing routes
+Find templating system
+Map routes to static content
