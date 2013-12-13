@@ -1,6 +1,11 @@
 Long Play
 
-Add route resolver
-Add views for adding / removing routes
-Find templating system
-Map routes to static content
+Add templates (dynamic or static files?)
+Improve route resolver to handle trailing backslashes
+Improve route resolver to extract params from the urls
+
+Twitter bootstrap ALL THE THINGS!
+
+Add persistence (redis?)
+
+Integrate with varnish?
