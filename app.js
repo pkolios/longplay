@@ -51,9 +51,9 @@ app.post('/admin/pages', function(req, res) {
 app.get('/*', function(req, res) {
     var router = new Router();
     route = router.map(req.params[0]);
-    var pager = new Pager();
-    response = pager.map(route.id);
-    if (response) {
+    if (route) {
+        var pager = new Pager();
+        response = pager.map(route.id);
         res.json(response);
     } else {
         // TODO render a 404 template
