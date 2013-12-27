@@ -1,0 +1,19 @@
+{% extends '../layout.html' %}
+
+{% block title %}Add template{% endblock %}
+
+{% block head %}
+  {% parent %}
+  <link rel="stylesheet" href="custom.css">
+{% endblock %}
+
+{% block content %}
+<form class="form-inline" role="form" method="post" action="/admin/templates">
+  <div class="form-group">
+    <label class="sr-only" for="template">Template</label>
+    <input type="text" class="form-control" name="template" placeholder="Enter template name">
+  </div>
+  <button type="submit" class="btn btn-default">Submit</button>
+  <a href="/admin/templates">Back</a>
+</form>
+{% endblock %}
