@@ -5,6 +5,7 @@ var app = express();
 
 // Middlewares
 app.use(express.bodyParser());
+app.use(express.static(__dirname + '/static'));
 
 // Templating
 app.engine('html', swig.renderFile);

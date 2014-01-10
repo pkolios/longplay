@@ -13,7 +13,7 @@ app.get('/admin', function(req, res) {
 app.get('/admin/routes', function(req, res) {
     // Routes list
     var router = new Router();
-    res.json(router.list());
+    res.render('routes/index', {'routes': router.list()});
 });
 
 app.get('/admin/routes/add', function(req, res) {
@@ -31,7 +31,7 @@ app.post('/admin/routes', function(req, res) {
 app.get('/admin/templates', function(req, res) {
     // templates list
     var templater = new Templater();
-    res.json(templater.list());
+    res.render('templates/index', {'templates': templater.list()});
 });
 
 app.get('/admin/templates/add', function(req, res) {
@@ -49,7 +49,7 @@ app.post('/admin/templates', function(req, res) {
 app.get('/admin/pages', function(req, res) {
     // Routes list
     var pager = new Pager();
-    res.json(pager.list());
+    res.render('pages/index', {'pages': pager.list()});
 });
 
 app.get('/admin/pages/add', function(req, res) {
