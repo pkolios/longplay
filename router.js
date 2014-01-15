@@ -1,7 +1,11 @@
 var _ = require('lodash');
 var uuid = require('node-uuid');
 
-var routes = [];
+var routes = [{
+    'id': '831d7194-cb46-4721-bb12-3f6583d0752f',
+    'priority': '1',
+    'url': 'foo/bar'
+}];
 
 var Router = function() {};
 
