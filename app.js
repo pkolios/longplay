@@ -21,6 +21,12 @@ app.get('/admin/routes/add', function(req, res) {
     res.render('routes/add', {});
 });
 
+app.get('/admin/routes/:id/delete', function(req, res) {
+    var router = new Router();
+    router.delete(req.params.id);
+    res.redirect('/admin/routes');
+});
+
 app.post('/admin/routes', function(req, res) {
     var router = new Router();
     router.add(req.body.route, req.body.priority);

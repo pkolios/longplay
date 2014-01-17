@@ -1,5 +1,5 @@
-(L)ong (P)lay
-=============
+Long Play
+=========
 
 Match routes to content and templates. Minimal landing page management system.
 
