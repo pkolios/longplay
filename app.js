@@ -1,4 +1,5 @@
 var _ = require('lodash');
+var swig = require('swig');
 
 var app = require('./init');
 
@@ -81,7 +82,7 @@ app.get('/admin/templates/add', function(req, res) {
 
 app.post('/admin/templates', function(req, res) {
     var templater = new Templater();
-    templater.add(req.body.template);
+    templater.add(req.body.name, req.body.template);
 
     res.redirect('/admin/templates');
 });
@@ -97,8 +98,15 @@ app.get('/*', function(req, res) {
     var route = router.map(req.params[0]);
     if (route) {
         var pager = new Pager();
-        var response = pager.map(route.id);
-        res.json(response);
+        var templater = new Templater();
+        var page = pager.map(route.id);
+
+        var templates = templater.list();
+        page.template = _.find(templates, {'id': page.template_id})
+
+        var response = swig.render(page.template.template,
+            {locals: {title: page.title, content: page.content }});
+        res.status(200).send(response);
     } else {
         // TODO render a 404 template
         res.status(404).send('Not found');

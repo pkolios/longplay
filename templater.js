@@ -3,7 +3,8 @@ var uuid = require('node-uuid');
 
 var templates = [{
     'id': 'a486d3c3-bae9-49dc-afe3-e88c0b9b7425',
-    'name': 'barfoo'
+    'name': 'example',
+    'template': '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>{{ title }}</title></head><body>{{ content }}</body></html>'
 }];
 
 var Templater = function() {};
@@ -14,19 +15,14 @@ Templater.prototype.list = function() {
     return templates;
 };
 
-Templater.prototype.list = function() {
-    // TODO switch to storage agnostic
-    // TODO move memory storage implementation out
-    return templates;
-};
-
-Templater.prototype.add = function(name) {
+Templater.prototype.add = function(name, template) {
     // TODO switch to storage agnostic
     // TODO move memory storage implementation out
     // TODO data validation
     var newTemplate = {
         'id': uuid.v4(),
-        'name': name
+        'name': name,
+        'template': template
     };
     templates.push(newTemplate);
     return newTemplate;
