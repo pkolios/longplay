@@ -22,7 +22,7 @@ Router.prototype.list = function() {
     // TODO switch to storage agnostic
     // TODO move memory storage implementation out
     return routes;
-}
+};
 
 Router.prototype.add = function(url, priority) {
     // TODO switch to storage agnostic
@@ -35,10 +35,10 @@ Router.prototype.add = function(url, priority) {
     };
     routes.push(newRoute);
     return newRoute;
-}
+};
 
 Router.prototype.delete = function(id) {
     var match = _.find(routes, { 'id': id });
     routes = _.without(routes, match);
-}
+};
 module.exports = Router;

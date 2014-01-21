@@ -1,3 +1,5 @@
+var _ = require('lodash');
+
 var app = require('./init');
 
 var Pager = require('./pager');
@@ -11,20 +13,12 @@ app.get('/admin', function(req, res) {
 });
 
 app.get('/admin/routes', function(req, res) {
-    // Routes list
     var router = new Router();
     res.render('routes/index', {'routes': router.list()});
 });
 
 app.get('/admin/routes/add', function(req, res) {
-    // Add route form
     res.render('routes/add', {});
-});
-
-app.get('/admin/routes/:id/delete', function(req, res) {
-    var router = new Router();
-    router.delete(req.params.id);
-    res.redirect('/admin/routes');
 });
 
 app.post('/admin/routes', function(req, res) {
@@ -34,32 +28,28 @@ app.post('/admin/routes', function(req, res) {
     res.redirect('/admin/routes');
 });
 
-app.get('/admin/templates', function(req, res) {
-    // templates list
-    var templater = new Templater();
-    res.render('templates/index', {'templates': templater.list()});
-});
-
-app.get('/admin/templates/add', function(req, res) {
-    // Add template form
-    res.render('templates/add', {});
-});
-
-app.post('/admin/templates', function(req, res) {
-    var templater = new Templater();
-    templater.add(req.body.template);
-
-    res.redirect('/admin/templates');
+app.get('/admin/routes/:id/delete', function(req, res) {
+    var router = new Router();
+    router.delete(req.params.id);
+    res.redirect('/admin/routes');
 });
 
 app.get('/admin/pages', function(req, res) {
-    // Routes list
     var pager = new Pager();
+    var router = new Router();
+    var templater = new Templater();
+    var pages = pager.list();
+    var routes = router.list();
+    var templates = templater.list();
+
+    pages.forEach(function(page) {
+        page.route = _.find(routes, {'id': page.route_id})
+        page.template = _.find(templates, {'id': page.template_id})
+    });
     res.render('pages/index', {'pages': pager.list()});
 });
 
 app.get('/admin/pages/add', function(req, res) {
-    // Add page form
     var router = new Router();
     var templater = new Templater();
     var routes = router.list();
@@ -72,6 +62,34 @@ app.post('/admin/pages', function(req, res) {
     pager.add(req.body.route_id, req.body.template_id, req.body.title, req.body.content);
 
     res.redirect('/admin/pages');
+});
+
+app.get('/admin/pages/:id/delete', function(req, res) {
+    var pager = new Pager();
+    pager.delete(req.params.id);
+    res.redirect('/admin/pages');
+});
+
+app.get('/admin/templates', function(req, res) {
+    var templater = new Templater();
+    res.render('templates/index', {'templates': templater.list()});
+});
+
+app.get('/admin/templates/add', function(req, res) {
+    res.render('templates/add', {});
+});
+
+app.post('/admin/templates', function(req, res) {
+    var templater = new Templater();
+    templater.add(req.body.template);
+
+    res.redirect('/admin/templates');
+});
+
+app.get('/admin/templates/:id/delete', function(req, res) {
+    var templater = new Templater();
+    templater.delete(req.params.id);
+    res.redirect('/admin/templates');
 });
 
 app.get('/*', function(req, res) {

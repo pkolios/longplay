@@ -30,4 +30,10 @@ Pager.prototype.add = function(route_id, template_id, title, content) {
     pages.push(newPage);
     return newPage;
 };
+
+Pager.prototype.delete = function(id) {
+    var match = _.find(pages, { 'id': id });
+    pages = _.without(pages, match);
+};
+
 module.exports = Pager;
