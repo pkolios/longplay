@@ -2,22 +2,19 @@
 
 {% block title %}Add template{% endblock %}
 
-{% block head %}
-  {% parent %}
-  <link rel="stylesheet" href="custom.css">
-{% endblock %}
-
 {% block content %}
-<form class="form-inline" role="form" method="post" action="/admin/templates">
+<form role="form" method="post" action="/admin/templates">
   <div class="form-group">
-    <label class="sr-only" for="template">Template name</label>
+    <label for="template">Template name</label>
     <input type="text" class="form-control" name="name" placeholder="Enter name">
   </div>
   <div class="form-group">
-    <label class="sr-only" for="template">Template</label>
-    <textarea type="text" class="form-control" name="template" placeholder="Enter template"></textarea>
+    <label for="template">Template</label>
+    <textarea type="text" class="form-control" rows=20 name="template" placeholder="Enter template"></textarea>
   </div>
-  <button type="submit" class="btn btn-default">Submit</button>
-  <a href="/admin/templates">Back</a>
+  <div class="pull-right">
+    <button type="submit" class="btn btn-default">Submit</button>
+    <a href="/admin/templates">Back</a>
+  </div>
 </form>
 {% endblock %}
