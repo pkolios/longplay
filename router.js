@@ -9,6 +9,11 @@ var routes = [{
 
 var Router = function() {};
 
+Router.prototype.get = function(id) {
+    var match = _.find(routes, { 'id': id });
+    return match;
+};
+
 Router.prototype.map = function(url) {
     // TODO Deal with multiple matches / priorities
     // TODO Deal with trailing slashes
@@ -35,6 +40,13 @@ Router.prototype.add = function(url, priority) {
     };
     routes.push(newRoute);
     return newRoute;
+};
+
+Router.prototype.edit = function(id, url, priority) {
+    var match = _.find(routes, { 'id': id });
+    match.url = url;
+    match.priority = priority;
+    return match;
 };
 
 Router.prototype.delete = function(id) {

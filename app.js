@@ -29,8 +29,20 @@ app.post('/admin/routes', function(req, res) {
     res.redirect('/admin/routes');
 });
 
-app.get('/admin/routes/:id/delete', function(req, res) {
+app.get('/admin/routes/:id/edit', function(req, res) {
     var router = new Router();
+    res.render('routes/edit', {'route': router.get(req.params.id)});
+});
+
+app.post('/admin/routes/:id/edit', function(req, res) {
+    var router = new Router();
+    router.edit(req.params.id, req.body.route, req.body.priority);
+
+    res.redirect('/admin/routes');
+});
+
+app.get('/admin/routes/:id/delete', function(req, res) {
+    var router = new router();
     router.delete(req.params.id);
     res.redirect('/admin/routes');
 });
