@@ -3,6 +3,7 @@
 {% block title %}Edit route{% endblock %}
 
 {% block content %}
+<h3>Edit route {{ route.url }}</h3>
 <form role="form" method="post" action="/admin/routes/{{ route.id }}/edit">
   <div class="form-group">
     <label for="route">Route</label>

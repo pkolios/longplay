@@ -3,6 +3,7 @@
 {% block title %}Edit template{% endblock %}
 
 {% block content %}
+<h3>Edit template {{ template.name }}</h3>
 <form role="form" method="post" action="/admin/templates/{{ template.id }}/edit">
   <div class="form-group">
     <label for="template">Template name</label>

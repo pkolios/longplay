@@ -3,6 +3,7 @@
 {% block title %}Edit page{% endblock %}
 
 {% block content %}
+<h3>Edit page {{ page.title }}</h3>
 <form  role="form" method="post" action="/admin/pages/{{ page.id }}/edit">
   <div class="form-group">
     <label for="route_id">Route</label>
