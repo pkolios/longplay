@@ -52,13 +52,12 @@ app.get('/admin/pages', function(req, res) {
     var router = new Router();
     var templater = new Templater();
     var pages = pager.list();
-    var templates = templater.list();
 
     pages.forEach(function(page) {
         page.route = router.get(page.route_id);
-        page.template = _.find(templates, {'id': page.template_id});
+        page.template = templater.get(page.template_id);
     });
-    res.render('pages/index', {'pages': pager.list()});
+    res.render('pages/index', {'pages': pages});
 });
 
 app.get('/admin/pages/add', function(req, res) {
@@ -72,6 +71,22 @@ app.get('/admin/pages/add', function(req, res) {
 app.post('/admin/pages', function(req, res) {
     var pager = new Pager();
     pager.add(req.body.route_id, req.body.template_id, req.body.title, req.body.content);
+
+    res.redirect('/admin/pages');
+});
+
+app.get('/admin/pages/:id/edit', function(req, res) {
+    var pager = new Pager();
+    var router = new Router();
+    var templater = new Templater();
+    var routes = router.list();
+    var templates = templater.list();
+    res.render('pages/edit', {'page': pager.get(req.params.id), 'routes': routes, 'templates': templates});
+});
+
+app.post('/admin/pages/:id/edit', function(req, res) {
+    var pager = new Pager();
+    pager.edit(req.params.id, req.body.route_id, req.body.template_id, req.body.title, req.body.content);
 
     res.redirect('/admin/pages');
 });
