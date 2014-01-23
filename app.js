@@ -42,7 +42,7 @@ app.post('/admin/routes/:id/edit', function(req, res) {
 });
 
 app.get('/admin/routes/:id/delete', function(req, res) {
-    var router = new router();
+    var router = new Router();
     router.delete(req.params.id);
     res.redirect('/admin/routes');
 });
