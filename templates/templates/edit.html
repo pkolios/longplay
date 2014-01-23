@@ -1,16 +1,16 @@
 {% extends '../layout.html' %}
 
-{% block title %}Add template{% endblock %}
+{% block title %}Edit template{% endblock %}
 
 {% block content %}
-<form role="form" method="post" action="/admin/templates">
+<form role="form" method="post" action="/admin/templates/{{ template.id }}/edit">
   <div class="form-group">
     <label for="template">Template name</label>
-    <input type="text" class="form-control" name="name" placeholder="Enter name">
+    <input type="text" class="form-control" name="name" value="{{ template.name }}">
   </div>
   <div class="form-group">
     <label for="template">Template</label>
-    <textarea type="text" class="form-control" rows=20 name="template" placeholder="Enter template"></textarea>
+    <textarea type="text" class="form-control" rows=20 name="template">{{ template.template }}</textarea>
   </div>
   <div class="pull-right">
     <a class="space-right" href="/admin/templates">Back</a>

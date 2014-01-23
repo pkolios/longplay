@@ -9,6 +9,11 @@ var templates = [{
 
 var Templater = function() {};
 
+Templater.prototype.get = function(id) {
+    var match = _.find(templates, { 'id': id });
+    return match;
+};
+
 Templater.prototype.list = function() {
     // TODO switch to storage agnostic
     // TODO move memory storage implementation out
@@ -26,6 +31,13 @@ Templater.prototype.add = function(name, template) {
     };
     templates.push(newTemplate);
     return newTemplate;
+};
+
+Templater.prototype.edit = function(id, name, template) {
+    var match = _.find(templates, { 'id': id });
+    match.name = name;
+    match.template = template;
+    return match;
 };
 
 Templater.prototype.delete = function(id) {

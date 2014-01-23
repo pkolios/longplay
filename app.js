@@ -52,12 +52,11 @@ app.get('/admin/pages', function(req, res) {
     var router = new Router();
     var templater = new Templater();
     var pages = pager.list();
-    var routes = router.list();
     var templates = templater.list();
 
     pages.forEach(function(page) {
-        page.route = _.find(routes, {'id': page.route_id})
-        page.template = _.find(templates, {'id': page.template_id})
+        page.route = router.get(page.route_id);
+        page.template = _.find(templates, {'id': page.template_id});
     });
     res.render('pages/index', {'pages': pager.list()});
 });
@@ -95,6 +94,18 @@ app.get('/admin/templates/add', function(req, res) {
 app.post('/admin/templates', function(req, res) {
     var templater = new Templater();
     templater.add(req.body.name, req.body.template);
+
+    res.redirect('/admin/templates');
+});
+
+app.get('/admin/templates/:id/edit', function(req, res) {
+    var templater = new Templater();
+    res.render('templates/edit', {'template': templater.get(req.params.id)});
+});
+
+app.post('/admin/templates/:id/edit', function(req, res) {
+    var templater = new Templater();
+    templater.edit(req.params.id, req.body.name, req.body.template);
 
     res.redirect('/admin/templates');
 });
